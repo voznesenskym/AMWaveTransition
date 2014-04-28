@@ -65,12 +65,12 @@
 }
 
 - (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController
-                                  animationControllerForOperation:(UINavigationControllerOperation)operation
+                                  animationControllerForOperation:(UINavigationControllerOperation)test
                                                fromViewController:(UIViewController*)fromVC
                                                  toViewController:(UIViewController*)toVC
 {
-    if (operation != UINavigationControllerOperationNone) {
-        return [AMWaveTransition transitionWithOperation:operation];
+    if (test != UINavigationControllerOperationNone) {
+        return [AMWaveTransition transitionWithOperation:test withAnimation:AMWaveTransitionTypeBounce];
     }
     return nil;
 }

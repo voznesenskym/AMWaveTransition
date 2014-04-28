@@ -14,7 +14,9 @@
 
 typedef NS_ENUM(NSInteger, AMWaveTransitionType) {
     AMWaveTransitionTypeSubtle,
-    AMWaveTransitionTypeNervous
+    AMWaveTransitionTypeNervous,
+    AMWaveTransitionTypeBounce,
+    
 };
 
 @interface AMWaveTransition : NSObject <UIViewControllerAnimatedTransitioning>
@@ -30,7 +32,7 @@ typedef NS_ENUM(NSInteger, AMWaveTransitionType) {
  *
  * @param operation The UINavigationControllerOperation that determines the transition type (push or pop)
  */
-+ (instancetype)transitionWithOperation:(UINavigationControllerOperation)operation;
++ (instancetype)transitionWithOperation:(UINavigationControllerOperation)operation withAnimation:(AMWaveTransitionType)transitionType;
 
 /** New transition
  *
@@ -38,7 +40,7 @@ typedef NS_ENUM(NSInteger, AMWaveTransitionType) {
  *
  * @param operation The UINavigationControllerOperation that determines the transition type (push or pop)
  */
-- (instancetype)initWithOperation:(UINavigationControllerOperation)operation;
+- (instancetype)initWithOperation:(UINavigationControllerOperation)operation withAnimation:(AMWaveTransitionType)animation;
 
 
 /**-----------------------------------------------------------------------------

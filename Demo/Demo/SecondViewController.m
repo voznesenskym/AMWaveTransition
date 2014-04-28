@@ -52,7 +52,7 @@
                                                  toViewController:(UIViewController*)toVC
 {
     if (operation != UINavigationControllerOperationNone) {
-        return [AMWaveTransition transitionWithOperation:operation];
+        return [AMWaveTransition transitionWithOperation:operation withAnimation:AMWaveTransitionTypeNervous];
     }
     return nil;
 }

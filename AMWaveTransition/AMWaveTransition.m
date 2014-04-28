@@ -12,8 +12,8 @@
 
 #define SCREEN_WIDTH ((([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortrait) || ([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortraitUpsideDown)) ? [[UIScreen mainScreen] bounds].size.width : [[UIScreen mainScreen] bounds].size.height)
 
-#define DURATION    0.65
-#define MAX_DELAY   0.15
+static const float duration_of_transition = 0.65f;
+static const float maximum_transition_delay = 0.15f;
 
 - (instancetype)init
 {
@@ -24,19 +24,19 @@
     return self;
 }
 
-+ (instancetype)transitionWithOperation:(UINavigationControllerOperation)operation
++ (instancetype)transitionWithOperation:(UINavigationControllerOperation)operation withAnimation:(AMWaveTransitionType)transitionType
 {
-    return [[self alloc] initWithOperation:operation];
+    return [[self alloc] initWithOperation:operation withAnimation:transitionType];
 }
 
-- (instancetype)initWithOperation:(UINavigationControllerOperation)operation
+- (instancetype)initWithOperation:(UINavigationControllerOperation)operation withAnimation:(AMWaveTransitionType)transitionType
 {
     self = [super init];
     if (self) {
         _operation = operation;
-        _duration = DURATION;
-        _maxDelay = MAX_DELAY;
-        _transitionType = AMWaveTransitionTypeNervous;
+        _duration = duration_of_transition;
+        _maxDelay = maximum_transition_delay;
+        _transitionType = transitionType;
     }
     return self;
 }
@@ -113,8 +113,10 @@
                 };
                 if (self.transitionType == AMWaveTransitionTypeSubtle) {
                     [UIView animateWithDuration:self.duration delay:delay options:UIViewAnimationOptionCurveEaseIn animations:animation completion:completion];
-                } else {
+                } else if (self.transitionType == AMWaveTransitionTypeNervous){
                     [UIView animateWithDuration:self.duration delay:delay usingSpringWithDamping:0.75 initialSpringVelocity:1 options:UIViewAnimationOptionCurveEaseIn animations:animation completion:completion];
+                } else if (self.transitionType == AMWaveTransitionTypeBounce){
+                    [UIView animateWithDuration:self.duration delay:delay options:UIViewAnimationOptionCurveEaseInOut animations:animation completion:nil];
                 }
             }];
         }
@@ -129,8 +131,10 @@
                 };
                 if (self.transitionType == AMWaveTransitionTypeSubtle) {
                     [UIView animateWithDuration:self.duration delay:delay options:UIViewAnimationOptionCurveEaseIn animations:animation completion:nil];
-                } else {
+                } else if (self.transitionType == AMWaveTransitionTypeNervous){
                     [UIView animateWithDuration:self.duration delay:delay usingSpringWithDamping:0.75 initialSpringVelocity:1 options:UIViewAnimationOptionCurveEaseIn animations:animation completion:nil];
+                } else if (self.transitionType == AMWaveTransitionTypeBounce){
+                    [UIView animateWithDuration:self.duration delay:delay options:UIViewAnimationOptionCurveEaseInOut animations:animation completion:nil];
                 }
             }];
         }
